@@ -1,6 +1,9 @@
 import { useState } from "react"
 import logo from "../assets/Learn Link Logo.png"
 import { Link, useNavigate } from "react-router"
+import { signInWithEmailAndPassword } from "firebase/auth"
+import { auth, db } from "../firebaseConfigration/firebaseConfigration"
+import { doc, getDoc } from "firebase/firestore"
 
 export function UserLogin() {
   const [username, setUsername] = useState("")
@@ -10,13 +13,34 @@ export function UserLogin() {
   const [loading, setLoading] = useState(false) 
  
   const navigate = useNavigate()
-  const handleLogin = (e)=>{
+
+  const handleLogin = async(e)=>{
     e.preventDefault()
     
     setLoading(true)
     setError("")
-    
 
+    try{
+        const userCredential = await signInWithEmailAndPassword(auth, username, password)
+        let user = userCredential.user
+        console.log(user)
+        const userDoc = await getDoc(doc(db, "users", user.uid))
+        if(userDoc.exists()){
+          const userDate = userDoc.data()
+          if(userDate.role != role){
+             setError("Role mismatch. Please select the correct role.")
+          }else{
+            if(role === "student"){
+              navigate("/student-dashboard")
+            }else if(role === "teacher"){
+              navigate("/teacher-dashboard")
+            }
+          }
+        }
+    }catch(error){
+      setError(error.message)
+    }
+  setLoading(false)
   }
 
   return (
@@ -26,7 +50,7 @@ export function UserLogin() {
           <img src={logo} alt="Learn Link Logo" className="h-40 w-auto mix-blend-darken" />
         </div>
         <h2 className="mb-6 text-center text-2xl font-bold text-gray-800">Login</h2>
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleLogin}>
            {error && <p className="text-red-500 text-sm">{error}</p>}
            <br />
           <div>
