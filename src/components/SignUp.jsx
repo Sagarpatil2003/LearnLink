@@ -75,7 +75,7 @@ let handleSignUp = async (e) => {
 }
 
   return (
-    <div className="flex h-screen items-center bg-gradient-to-r from-yellow-100 via-red-100 to-pink-100 justify-center bg-gray-100">
+    <div className="flex h-screen items-center bg-gradient-to-r from-yellow-100 via-red-100 to-pink-100 justify-center">
       <div className="w-full max-w-sm rounded-2xl bg-white p-7 shadow-lg">
         <div className="flex justify-center mb-4">
           <img src={logo} alt="Learn Link Logo" className="h-25 w-auto mix-blend-darken" />
