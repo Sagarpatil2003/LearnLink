@@ -54,7 +54,7 @@ export function UserLogin() {
            {error && <p className="text-red-500 text-sm">{error}</p>}
            <br />
           <div>
-            <label className="block text-sm font-medium text-gray-700">Username</label>
+            <label className="block text-sm font-medium text-gray-700">Username (Email)</label>
             <input
               type="text"
               value={username}
