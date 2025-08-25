@@ -5,10 +5,10 @@ import { PageNotFound } from './components/PageNotFound'
 import { SignUp } from './components/SignUp'
 import { StudentDashboard } from './components/StudentDashboard'
 import { TeacherDashboard } from './components/TeacherDashboard'
+import { CreateSession } from './components/CreateSession'
+import {Whiteboard}from './components/Whiteboard'
 
 function App() {
-  
-
   return (
     <>
       <Routes>
@@ -16,8 +16,9 @@ function App() {
           <Route path='/signup' element={<SignUp/>}></Route>
           <Route path='/student-dashboard' element={<StudentDashboard/>}></Route>
           <Route path='/teacher-dashboard' element={<TeacherDashboard/>}></Route>
+           <Route path='/create-session' element={<CreateSession/>}></Route>
+           <Route  path='/white-board' element={<Whiteboard />}></Route>
           <Route path='*' element={<PageNotFound/>}></Route>
-          
       </Routes>
     </>
   )
